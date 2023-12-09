@@ -1,38 +1,155 @@
-.App {
-  text-align: center;
+nav{
+  background:#a5c7ea;
+  max-height:85px;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: bolder;
+  text-transform: capitalize;
+  user-select: none;
+}
+nav:after{
+  content: '';
+  clear: both;
+  display: table;
+}
+nav .logo{
+  float: left;
+width:180px;
+height: 80px;
+  padding-left: 50px;
+}
+nav .logo img{
+ 
+  height: 100%;
+}
+nav ul{
+  float: right;
+  margin-right: 10px;
+  list-style: none;
+padding:0 35px 0 0 ;
+}
+nav ul li{
+  float: left;
+ 
+  position: relative;
+
+}
+nav ul li a{
+  color:black;
+  line-height: 50px;
+  text-decoration: none;
+  font-size: 18px;
+
+  
+}
+.padding{
+  padding: 8px 15px;
+}
+nav ul li a:hover{
+  color: black;
+  border-radius: 5px;
+  box-shadow:  0 0 5px  #004aad,
+               0 0 10px #004aad;
+ 
+               
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.icon,nav input{
+  display: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media all and (max-width: 968px) {
+  nav ul{
+  padding:50px;
+  float:left;
+    text-align: center;
+  border:2px solid blue;
+  width:100%;
+  }
+  nav .logo{
+   padding-left: 20px;
+  width: 140px;
+  }
+  .show + a,nav ul{
+    display: none;
+  }
+  nav ul li{
+    display: block;
+    width: 100%;
+  }
+  nav ul li a:hover{
+    box-shadow: none;
+    color:#004aad
+  }
+  .show{
+    display: block;
+    color: black;
+    font-size: 18px;
+   
+    line-height: 70px;
+    cursor: pointer;
+  }
+  .show:hover{
+    color:#004aad;
+    background-color: #a5c7ea;
+  }
+  .icon{
+    display: block;
+    color: black;
+    position: absolute;
+    top: 10px;
+    right: 40px;
+    line-height: 70px;
+    cursor: pointer;
+    font-size: 25px;
+    transform: scaleX(1.5);
+   
+  }
+ 
+ 
+  [id^=btn]:checked + ul{
+    display: block;
+  }
+ 
+  span.cancel:before{
+    content: '\f00d';
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.exchanger{
+  display:flex;
+}
+.div1, .div2 ,.div3 {
+  flex: 1;
+  padding:5px;
+}
+
+.div4 {
+display: flex;
+}
+.process-container{
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.child {
+    display: flex;
+    flex: 1;
+    padding: 10px; /* Optional: Adding padding for visibility */
   }
-  to {
-    transform: rotate(360deg);
+
+  .important{
+    display: block;
   }
-}
+
+  .result-container{
+    display: flex;
+  }
+
+  .container1{
+    border: 1px solid #000;
+  }
+  .results{
+    flex:1;
+  }
+
