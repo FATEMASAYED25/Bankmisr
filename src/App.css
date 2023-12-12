@@ -83,12 +83,10 @@ nav ul li a{
 }
 .div1, .div2 ,.div3 {
   flex: 1;
-  padding:5px;
+ margin-bottom: 20px;
 }
 
-.div4 {
-display: flex;
-}
+
 .process-container{
   display: flex;
 }
