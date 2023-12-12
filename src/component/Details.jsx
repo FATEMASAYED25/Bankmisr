@@ -3,7 +3,7 @@ import { FaArrowsAltH } from "react-icons/fa";
 import axios from "axios";
 
 const fromCurrencyOptions = [
-  "Select fromCurrency", // Add an initial default option
+  "Select fromCurrency", // initial default option
   "USD",
   "GBP",
   "CAD",
@@ -12,7 +12,7 @@ const fromCurrencyOptions = [
 ];
 
 const toCurrencyOptions = [
-  "Select fromCurrency", // Add an initial default option
+  "Select fromCurrency", // initial default option
   "USD",
   "GBP",
   "CAD",
@@ -105,7 +105,7 @@ const Details = () => {
                 </select>
               </div>
 
-              <div className="div2">
+              <div className="div2 arrow">
                 <FaArrowsAltH />
               </div>
               <div className="div3">
@@ -150,7 +150,7 @@ const Details = () => {
                 type="number"
                 id="amount"
                 name="amount"
-                placeholder={`xxxx ${selectedtoCurrency}`}
+                placeholder={`${convertedAmount} ${selectedtoCurrency}`}
               />
             </div>
             

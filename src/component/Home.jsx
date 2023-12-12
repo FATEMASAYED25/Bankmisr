@@ -3,7 +3,7 @@ import { FaArrowsAltH } from "react-icons/fa";
 import axios from "axios";
 
 const fromCurrencyOptions = [
-  "Select fromCurrency", // Add an initial default option
+  "Select fromCurrency", // initial default option
   "USD",
   "GBP",
   "CAD",
@@ -12,7 +12,7 @@ const fromCurrencyOptions = [
 ];
 
 const toCurrencyOptions = [
-  "Select fromCurrency", // Add an initial default option
+  "Select fromCurrency", // initial default option
   "USD",
   "GBP",
   "CAD",
@@ -67,8 +67,8 @@ const Home = () => {
     <div>
       <h1>Currency Exchanger</h1>
       <div className="container1">
-        <div class="process-container">
-          <div class="child">
+        <div className="process-container">
+          <div className="child">
             <div style={{ display: "block" }}>
               <label htmlFor="amount">Amount</label>
               <br />
@@ -83,9 +83,9 @@ const Home = () => {
             </div>
           </div>
 
-          <div class="child important">
+          <div className="child important">
             <div style={{ display: "flex", flex: 1 }}>
-              <div class="div1">
+              <div className="div1">
                 <label htmlFor="fromCurrency">from:</label>
                 <br />
                 <select
@@ -101,10 +101,10 @@ const Home = () => {
                 </select>
               </div>
 
-              <div className="div2">
+              <div className="div2 arrow">
                 <FaArrowsAltH />
               </div>
-              <div class="div3">
+              <div className="div3">
                 <label htmlFor="toCurrency">to:</label>
                 <br />
                 <select
@@ -121,7 +121,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div class="div4">
+            <div className="div4">
               <button style={{ width: "100%", height: "25px" }}>
                 Convert
               </button>
@@ -129,7 +129,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div class="result-container">
+        <div className="result-container">
           <div className="child">
             <div class="results">
               <input
@@ -140,17 +140,17 @@ const Home = () => {
               />
             </div>
           </div>
-          <div className="child">
-            <div class="results">
+          <div className="child last">
+            <div className="results">
               <input
                 type="number"
                 id="amount"
                 name="amount"
-                placeholder={`xxxx ${selectedtoCurrency}`}
+                placeholder={`${convertedAmount} ${selectedtoCurrency}`}
               />
             </div>
-            <div class="results">
-              <button style={{ width: "50%", height: "25px" }}>
+            <div className="results ">
+              <button style={{ height: "25px" }}>
                 <a href="/Details">Details</a>
               </button>
             </div>

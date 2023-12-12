@@ -7,7 +7,7 @@ const Header = () => {
     <div>
         
     <nav>
-        <div class="logo">
+        <div className="logo">
             <img src={logo} alt="SAI LOGO" />
         </div>
 
@@ -15,8 +15,8 @@ const Header = () => {
         <input id="btn" type="checkbox" />
 
         <ul>
-            <li><a class="padding" href="/Details">EUR-USDDetails </a></li>
-            <li><a class="padding" href="/Details">EUR-GBP Details”</a></li>
+            <li><a className="padding" href="/Details">EUR-USDDetails </a></li>
+            <li><a className="padding" href="/Details">EUR-GBP Details”</a></li>
 
           </ul>
 

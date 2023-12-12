@@ -1,3 +1,9 @@
+body{
+  box-sizing: border-box;
+  overflow-x: hidden;/*to treat float style in various dives*/
+  margin: 0;
+}
+
 nav{
   background:#a5c7ea;
   max-height:85px;
@@ -60,41 +66,71 @@ nav ul li a:hover{
   display: none;
 }
 
+
+.exchanger{
+  display:flex;
+}
+.div1, .div2 ,.div3 {
+  flex: 1;
+  padding:5px;
+}
+
+.div4 {
+display: flex;
+}
+.process-container{
+  display: flex;
+}
+.child {
+    display: flex;
+    flex: 1;
+  margin: 10px; /* Optional: Adding padding for visibility */
+  }
+
+  .important{
+    display: block;
+  }
+
+  .result-container{
+    display: flex;
+    
+  }
+
+  .container1{
+    border: 1px solid #000;
+  }
+  .results{
+    flex:1;
+  }
+.arrow{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+
+
 @media all and (max-width: 968px) {
   nav ul{
-  padding:50px;
+    margin-top: 0;
+    padding-right: 0;
   float:left;
-    text-align: center;
-  border:2px solid blue;
+  text-align: center;
+ background-color: #a5c7ea;;
   width:100%;
   }
   nav .logo{
    padding-left: 20px;
   width: 140px;
   }
-  .show + a,nav ul{
+  nav ul{
     display: none;
   }
   nav ul li{
     display: block;
     width: 100%;
   }
-  nav ul li a:hover{
-    box-shadow: none;
-    color:#004aad
-  }
-  .show{
-    display: block;
-    color: black;
-    font-size: 18px;
-   
-    line-height: 70px;
-    cursor: pointer;
-  }
-  .show:hover{
-    color:#004aad;
-    background-color: #a5c7ea;
-  }
+
+
   .icon{
     display: block;
     color: black;
@@ -116,40 +152,13 @@ nav ul li a:hover{
   span.cancel:before{
     content: '\f00d';
   }
-}
-
-.exchanger{
-  display:flex;
-}
-.div1, .div2 ,.div3 {
-  flex: 1;
-  padding:5px;
-}
-
-.div4 {
-display: flex;
-}
-.process-container{
-  display: flex;
-}
-.child {
-    display: flex;
-    flex: 1;
-    padding: 10px; /* Optional: Adding padding for visibility */
-  }
-
-  .important{
+  .process-container{
     display: block;
   }
+  .last{
+    display: block;
+  }
+ 
 
-  .result-container{
-    display: flex;
-  }
-
-  .container1{
-    border: 1px solid #000;
-  }
-  .results{
-    flex:1;
-  }
+}
 
