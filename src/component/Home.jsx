@@ -65,7 +65,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Currency Exchanger</h1>
+      <h1 style={{marginLeft:"7px"}}>Currency Exchanger</h1>
       <div className="container1">
         <div className="process-container">
           <div className="child">
