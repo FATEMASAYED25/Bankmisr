@@ -15,6 +15,17 @@ nav{
   text-transform: capitalize;
   user-select: none;
 }
+button{
+  background-color: #a5c7ea;
+  color: #000;
+  font-weight:bolder;
+}
+button:hover{
+  color: black;
+  border-radius: 5px;
+  box-shadow:  0 0 3px  #004aad,
+               0 0 3px #004aad;
+}
 nav:after{
   content: '';
   clear: both;
@@ -53,7 +64,7 @@ nav ul li a{
 .padding{
   padding: 8px 15px;
 }
-nav ul li a:hover{
+ nav ul li a:hover{
   color: black;
   border-radius: 5px;
   box-shadow:  0 0 5px  #004aad,

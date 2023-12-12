@@ -67,7 +67,7 @@ const Details = () => {
     <div>
         <div style={{display:'flex'}}>
         <h1 style={{flex:1}}>Eur- European union Ero </h1>
-        <button style={{width:'100%' , height:'25px', flex:1}}><a href='/'> back to home</a></button>
+        <button style={{height:'25px',  margin:"22px"}}><a href='/'> back to home</a></button>
 
         </div>
       <div className="container1">
