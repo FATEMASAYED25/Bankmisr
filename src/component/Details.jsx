@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowsAltH } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { useLocation ,NavLink} from "react-router-dom";
 import axios from "axios";
 
 //keep the data the user entered inside cells althought sudden refresh to the browser
@@ -33,6 +33,10 @@ const Details = () => {
   return (
     <div>
     <h1 style={{marginLeft:"7px"}}>Details</h1>
+   <NavLink to="/" >
+   <button style={{ height: "25px" }}>Back To Home </button>
+    </NavLink>
+
     <div className="container1">
       <div className="process-container">
         <div className="child">
