@@ -99,6 +99,8 @@ const Details = () => {
       <div className="result-container">
         <div className="child">
           <div className="results">
+          <label htmlFor="conversion rate">conversion rate</label>
+          <br/>
             <input
               type="number"
               id="convertionrate"
@@ -109,6 +111,8 @@ const Details = () => {
         </div>
         <div className="child last">
           <div className="results">
+          <label htmlFor="converted amount">Converted Amount</label>
+          <br/>
             <input
               type="number"
               id="convertionresult"
