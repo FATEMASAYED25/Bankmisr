@@ -11,7 +11,7 @@ const Header = () => {
             <img src={logo} alt="SAI LOGO" />
         </div>
 
-        <label for="btn" class="icon"><span><FaAlignJustify /></span></label>
+        <label htmlFor="btn" className="icon"><span><FaAlignJustify /></span></label>
         <input id="btn" type="checkbox" />
 
         <ul>

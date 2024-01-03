@@ -1,67 +1,53 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowsAltH } from "react-icons/fa";
 import axios from "axios";
+import { Link } from "react-router-dom";  
+import Details from "./Details";
 
-const fromCurrencyOptions = [
-  "Select fromCurrency", // initial default option
-  "USD",
-  "GBP",
-  "CAD",
-  "INR",
-  "Other",
-];
-
-const toCurrencyOptions = [
-  "Select fromCurrency", // initial default option
-  "USD",
-  "GBP",
-  "CAD",
-  "INR",
-  "Other",
-];
 
 const Home = () => {
-  const [amount, setAmount] = useState(1);
-  const [selectedfromCurrency, setSelectedfromCurrency] = useState("USD");
-  const [selectedtoCurrency, setSelectedtoCurrency] = useState("GBP");
-  const [exchangeRate, setExchangeRate] = useState(null);
-  const [convertedAmount, setConvertedAmount] = useState(null);
+  const[symbols,setSymbols]=useState([""]);
+  const[fromcurrency,setFromcurrency]=useState("USD");
+  const[tocurrency,setTocurrency]=useState("EUR");
+  const[amount,setAmount]=useState(0);
+  const[convertionresult,setConvertionresult]=useState(0);
+  const[convertionrate,setConvertionrate]=useState(0);
+  const[convertiontime,setConvertiontime]=useState("");
+//get symbols for drobdown list 
 
-  useEffect(() => {
-    const fetchExchangeRate = async () => {
-      try {
-        const response = await axios.get(
-          `https://open.er-api.com/v6/latest/${selectedfromCurrency}`
-        );
-        const rates = response.data.rates;
-        const rate = rates[selectedtoCurrency];
-        setExchangeRate(rate);
-      } catch (error) {
-        console.error("Error fetching exchange rate:", error);
-      }
-    };
+  useEffect(()=>{
+      axios.get("https://v6.exchangerate-api.com/v6/64f645311446f41b5de65974/latest/USD ")
 
-    fetchExchangeRate();
-  }, [selectedfromCurrency, selectedtoCurrency]);
+      .then(response =>{
+        const symbols = Object.keys(response.data.conversion_rates);
+        setSymbols(symbols);
+      })
+      .catch(error => { console.log(error)
+      })
 
-  useEffect(() => {
-    if (exchangeRate !== null) {
-      const converted = amount * exchangeRate;
-      setConvertedAmount(converted.toFixed(2));
-    }
-  }, [amount, exchangeRate]);
+  },[]);
+ 
 
-  const handleAmountChange = (event) => {
-    setAmount(event.target.value);
-  };
 
-  const handlefromCurrencyChange = (event) => {
-    setSelectedfromCurrency(event.target.value);
-  };
+//get the converted amount 
 
-  const handletoCurrencyChange = (event) => {
-    setSelectedtoCurrency(event.target.value);
-  };
+const handlexchange= ()=>{
+axios.get(` https://v6.exchangerate-api.com/v6/64f645311446f41b5de65974/pair/${fromcurrency}/${tocurrency}/${amount}`)
+
+.then(response =>{
+const convertion = response.data;
+console.log(convertion)
+setConvertionresult(convertion.conversion_result  );
+setConvertionrate(convertion.conversion_rate);
+setConvertiontime(convertion.time_last_update_utc)
+
+
+ 
+})
+.catch(error => { console.log(error)
+})
+
+}
 
   return (
     <div>
@@ -76,8 +62,7 @@ const Home = () => {
                 type="number"
                 id="amount"
                 name="amount"
-                value={amount}
-                onChange={handleAmountChange}
+                onChange={(e)=>{setAmount(e.target.value)}}
               />
               <br />
             </div>
@@ -89,16 +74,15 @@ const Home = () => {
                 <label htmlFor="fromCurrency">from:</label>
                 <br />
                 <select
-                  id="fromCurrency"
-                  value={selectedfromCurrency}
-                  onChange={handlefromCurrencyChange}
-                >
-                  {fromCurrencyOptions.map((fromCurrency, index) => (
-                    <option key={index} value={fromCurrency}>
-                      {fromCurrency}
-                    </option>
-                  ))}
-                </select>
+                id="fromCurrency"
+                name="fromCurrency"
+                onChange={(e)=>{setFromcurrency(e.target.value)}}
+              >
+                {symbols.map((symbol,index) => (
+                  <option   key={index}  value={symbol}> {symbol}</option>
+                ) )}
+              
+              </select>
               </div>
 
               <div className="div2 arrow">
@@ -108,21 +92,23 @@ const Home = () => {
                 <label htmlFor="toCurrency">to:</label>
                 <br />
                 <select
-                  id="toCurrency"
-                  value={selectedtoCurrency}
-                  onChange={handletoCurrencyChange}
-                >
-                  {toCurrencyOptions.map((toCurrency, index) => (
-                    <option key={index} value={toCurrency}>
-                      {toCurrency}
-                    </option>
-                  ))}
-                </select>
+                id="toCurrency"
+                name="toCurrency"
+                onChange={(e)=>{setTocurrency(e.target.value)}}
+              >
+                {symbols.map(symbol => 
+                  <option  value={symbol}> {symbol}</option>
+                 )}
+              
+              </select>
               </div>
             </div>
 
             <div className="div4">
-              <button style={{ width: "100%", height: "25px" }}>
+              <button 
+              style={{ width: "100%", height: "25px" }}
+              onClick={handlexchange}
+              >
                 Convert
               </button>
             </div>
@@ -131,28 +117,33 @@ const Home = () => {
 
         <div className="result-container">
           <div className="child">
-            <div class="results">
+            <div className="results">
               <input
                 type="number"
-                id="amount"
-                name="amount"
-                value={convertedAmount}
+                id="convertionrate"
+                name="convertionrate"
+                value={convertionrate}
               />
+           
             </div>
           </div>
           <div className="child last">
             <div className="results">
               <input
                 type="number"
-                id="amount"
-                name="amount"
-                placeholder={`${convertedAmount} ${selectedtoCurrency}`}
+                id="convertionresult"
+                name="convertionresult"
+                value={convertionresult}
               />
             </div>
             <div className="results ">
-              <button style={{ height: "25px" }}>
-                <a href="/Details">Details</a>
-              </button>
+            <Link to={`/details?symbol=${symbols}&amount=${amount}&fromcurrency=${fromcurrency}
+            &tocurrency=${tocurrency}&convertionresult=${convertionresult}&convertionrate=${convertionrate}
+            &convertiontime=${convertiontime}
+            `}>
+              <button style={{ height: "25px" }}>  </button>
+            </Link>
+            
             </div>
           </div>
         </div>

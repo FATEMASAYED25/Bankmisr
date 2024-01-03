@@ -1,164 +1,127 @@
 import React, { useState, useEffect } from "react";
 import { FaArrowsAltH } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
-const fromCurrencyOptions = [
-  "Select fromCurrency", // initial default option
-  "USD",
-  "GBP",
-  "CAD",
-  "INR",
-  "Other",
-];
-
-const toCurrencyOptions = [
-  "Select fromCurrency", // initial default option
-  "USD",
-  "GBP",
-  "CAD",
-  "INR",
-  "Other",
-];
-
+//keep the data the user entered inside cells althought sudden refresh to the browser
 const Details = () => {
-  const [amount, setAmount] = useState(1);
-  const [selectedfromCurrency, setSelectedfromCurrency] = useState("USD");
-  const [selectedtoCurrency, setSelectedtoCurrency] = useState("GBP");
-  const [exchangeRate, setExchangeRate] = useState(null);
-  const [convertedAmount, setConvertedAmount] = useState(null);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+
+  const symbol = params.get("symbol");
+  const amount = params.get("amount");
+  const fromcurrency = params.get("fromcurrency");
+  const tocurrency = params.get("tocurrency");
+  const convertionresult = params.get("convertionresult");
+  const convertionrate = params.get("convertionrate");
+  const convertiontime = params.get("convertiontime");
 
   useEffect(() => {
-    const fetchExchangeRate = async () => {
-      try {
-        const response = await axios.get(
-          `https://open.er-api.com/v6/latest/${selectedfromCurrency}`
-        );
-        const rates = response.data.rates;
-        const rate = rates[selectedtoCurrency];
-        setExchangeRate(rate);
-      } catch (error) {
-        console.error("Error fetching exchange rate:", error);
-      }
-    };
+    // Save data to localStorage
+    localStorage.setItem("detailsData", JSON.stringify({
+      symbol,
+      amount,
+      fromcurrency,
+      tocurrency,
+      convertionresult,
+      convertionrate,
+      convertiontime
+    }));
+  }, [symbol, amount, fromcurrency, tocurrency, convertionresult, convertionrate, convertiontime]);
 
-    fetchExchangeRate();
-  }, [selectedfromCurrency, selectedtoCurrency]);
-
-  useEffect(() => {
-    if (exchangeRate !== null) {
-      const converted = amount * exchangeRate;
-      setConvertedAmount(converted.toFixed(2));
-    }
-  }, [amount, exchangeRate]);
-
-  const handleAmountChange = (event) => {
-    setAmount(event.target.value);
-  };
-
-  const handlefromCurrencyChange = (event) => {
-    setSelectedfromCurrency(event.target.value);
-  };
-
-  const handletoCurrencyChange = (event) => {
-    setSelectedtoCurrency(event.target.value);
-  };
-
+  
   return (
     <div>
-        <div  className="details-page">
-        <h1 style={{flex:1}}>Eur- European union Ero </h1>
-        <button style={{height:'25px',  margin:"22px 0"}}><a href='/'> back to home</a></button>
-
-        </div>
-      <div className="container1">
-        <div className="process-container">
-          <div className="child">
-            <div style={{ display: "block" }}>
-              <label htmlFor="amount">Amount</label>
-              <br />
-              <input
-                type="number"
-                id="amount"
-                name="amount"
-                value={amount}
-                onChange={handleAmountChange}
-              />
-              <br />
-            </div>
-          </div>
-
-          <div className="child important">
-            <div style={{ display: "flex", flex: 1 }}>
-              <div className="div1">
-                <label htmlFor="fromCurrency">from:</label>
-                <br />
-                <select
-                  id="fromCurrency"
-                  value={selectedfromCurrency}
-                  onChange={handlefromCurrencyChange}
-                >
-                  {fromCurrencyOptions.map((fromCurrency, index) => (
-                    <option key={index} value={fromCurrency}>
-                      {fromCurrency}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="div2 arrow">
-                <FaArrowsAltH />
-              </div>
-              <div className="div3">
-                <label htmlFor="toCurrency">to:</label>
-                <br />
-                <select
-                  id="toCurrency"
-                  value={selectedtoCurrency}
-                  onChange={handletoCurrencyChange}
-                >
-                  {toCurrencyOptions.map((toCurrency, index) => (
-                    <option key={index} value={toCurrency}>
-                      {toCurrency}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="div4">
-              <button style={{ width: "100%", height: "25px" }}>
-                Convert
-              </button>
-            </div>
+    <h1 style={{marginLeft:"7px"}}>Details</h1>
+    <div className="container1">
+      <div className="process-container">
+        <div className="child">
+          <div style={{ display: "block" }}>
+            <label htmlFor="amount">Amount</label>
+            <br />
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              placeholder={amount}
+           
+             
+            />
+            <br />
           </div>
         </div>
 
-        <div className="result-container">
-          <div className="child">
-            <div className="results">
-              <input
-                type="number"
-                id="amount"
-                name="amount"
-                value={convertedAmount}
-              />
-            </div>
-          </div>
-          <div className="child">
-            <div className="results">
-              <input
-                type="number"
-                id="amount"
-                name="amount"
-                placeholder={`${convertedAmount} ${selectedtoCurrency}`}
-              />
-            </div>
+        <div className="child important">
+          <div style={{ display: "flex", flex: 1 }}>
+            <div className="div1">
+              <label htmlFor="fromCurrency">from:</label>
+              <br />
             
+              <select
+                id="fromCurrency"
+                name="fromCurrency"
+               
+              >
+               
+                  <option value={fromcurrency}> {fromcurrency}</option>
+               
+              
+              </select>
+            </div>
+                    
+            <div className="div2 arrow">
+              <FaArrowsAltH />
+            </div>
+            <div className="div3">
+              <label htmlFor="toCurrency">to:</label>
+              <br />
+              <select
+                id="toCurrency"
+                name="toCurrency"
+               
+              >
+               
+                  <option  value={tocurrency}> {tocurrency}</option>
+                
+              
+              </select>
+            </div>
+          </div>
+
+      
+        </div>
+      </div>
+
+      <div className="result-container">
+        <div className="child">
+          <div className="results">
+            <input
+              type="number"
+              id="convertionrate"
+              name="convertionrate"
+              placeholder={convertionrate}
+            />
+          </div>
+        </div>
+        <div className="child last">
+          <div className="results">
+            <input
+              type="number"
+              id="convertionresult"
+              name="convertionresult"
+              placeholder={convertionresult}
+             
+            />
+          </div>
+          <div className="results ">
+            Date: {convertiontime}
+         
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  </div>
+  )
+}
 
 export default Details;
