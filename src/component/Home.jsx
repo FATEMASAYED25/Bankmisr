@@ -141,7 +141,7 @@ setConvertiontime(convertion.time_last_update_utc)
             &tocurrency=${tocurrency}&convertionresult=${convertionresult}&convertionrate=${convertionrate}
             &convertiontime=${convertiontime}
             `}>
-              <button style={{ height: "25px" }}>  </button>
+              <button style={{ height: "25px" }}> Details </button>
             </Link>
             
             </div>
